@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr Kali - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#7B68EE',secondary:'#00CED1'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+        .heading-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #7B68EE, #00CED1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .glass-card {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .skill-card {
+            transition: all 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(123, 104, 238, 0.2);
+        }
+        .portfolio-item {
+            transition: all 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+        }
+        .progress-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #7B68EE, #00CED1);
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #7B68EE;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #7B68EE;
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        .custom-checkbox.checked::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        .custom-switch {
+            width: 48px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .custom-switch.active {
+            background: #7B68EE;
+        }
+        .custom-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s;
+        }
+        .custom-switch.active::after {
+            left: 26px;
+        }
+        .custom-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #7B68EE;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+        }
+        .custom-radio.checked::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 28px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #7B68EE;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background: rgba(123, 104, 238, 0.3);
+        }
+        .timeline-item:last-child::after {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="relative min-h-screen flex flex-col" style="background-image: url('https://readdy.ai/api/search-image?query=professional%20dark%20abstract%20background%20with%20subtle%20purple%20and%20blue%20gradient%2C%20modern%20digital%20particles%20effect%2C%20perfect%20for%20portfolio%20website%2C%20high%20quality%2C%20minimalist%20design%2C%20elegant&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        
+        <!-- Navigation -->
+        <nav class="relative z-10 px-6 py-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="#" class="text-2xl font-['Pacifico'] text-white">Mr Kali</a>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-white hover:text-primary transition-colors">Home</a>
+                    <a href="#about" class="text-white hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="text-white hover:text-primary transition-colors">Skills</a>
+                    <a href="#portfolio" class="text-white hover:text-primary transition-colors">Portfolio</a>
+                    <a href="#contact" class="text-white hover:text-primary transition-colors">Contact</a>
+                </div>
+                
+                <button class="md:hidden w-10 h-10 flex items-center justify-center text-white">
+                    <i class="ri-menu-line ri-lg"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <div id="home" class="relative z-10 flex-1 flex items-center">
+            <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-6xl font-bold heading-font mb-4">
+                        Hello, I'm <span class="gradient-text">Mr Kali</span>
+                    </h1>
+                    <div class="h-12 overflow-hidden mb-6">
+                        <div id="text-rotate" class="text-xl md:text-2xl font-medium">
+                            <div>Digital Marketing Specialist</div>
+                            <div>Professional Video Editor</div>
+                            <div>Creative Graphic Designer</div>
+                            <div>Data & Trip Analyst</div>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-lg">
+                        Transforming ideas into digital excellence. I create compelling digital experiences through strategic marketing, stunning visuals, and data-driven insights.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">Hire Me</a>
+                        <a href="#portfolio" class="px-6 py-3 border border-white text-white font-medium !rounded-button hover:border-primary hover:text-primary transition-all whitespace-nowrap">View Work</a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary">
+                      
+                        <img src="https://i.im.ge/2025/05/08/vbBZ39.4c23fd34-a45c-4464-8abe-9d9cb26938cd.jpeg" alt="Mr Kali" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+            <a href="#about" class="w-10 h-10 flex items-center justify-center text-white border border-white rounded-full animate-bounce">
+                <i class="ri-arrow-down-line"></i>
+            </a>
+        </div>
+    </header>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold heading-font mb-4">About <span class="gradient-text">Me</span></h2>
+                <div class="w-24 h-1 bg-primary mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold mb-6">Who Am I?</h3>
+                    <p class="text-gray-300 mb-6">
+                        I'm a versatile digital professional with over 8 years of experience across multiple disciplines. My journey began in graphic design, which evolved into a passion for comprehensive digital marketing and video production.
+                    </p>
+                    <p class="text-gray-300 mb-6">
+                        With a Bachelor's degree in Digital Media from Columbia University and a Master's in Marketing Analytics from NYU, I combine creative vision with data-driven strategy to deliver exceptional results for my clients.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        I've had the privilege of working with brands like Tesla, Airbnb, and Spotify, helping them enhance their digital presence and connect with their audiences in meaningful ways.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#0077b5] rounded-full hover:opacity-90 transition-opacity">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#1da1f2] rounded-full hover:opacity-90 transition-opacity">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#e4405f] rounded-full hover:opacity-90 transition-opacity">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#333] rounded-full hover:opacity-90 transition-opacity">
+                            <i class="ri-github-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="glass-card p-8 rounded-lg mb-8">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <h4 class="text-4xl font-bold gradient-text mb-2">8+</h4>
+                                <p class="text-gray-400">Years Experience</p>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="text-4xl font-bold gradient-text mb-2">120+</h4>
+                                <p class="text-gray-400">Projects Completed</p>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="text-4xl font-bold gradient-text mb-2">50+</h4>
+                                <p class="text-gray-400">Happy Clients</p>
+                            </div>
+                            <div class="text-center">
+                                <h4 class="text-4xl font-bold gradient-text mb-2">15+</h4>
+                                <p class="text-gray-400">Awards Won</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-2xl font-semibold mb-6">Experience</h3>
+                    <div class="space-y-6">
+                        <div class="timeline-item pb-6">
+                            <h4 class="text-lg font-medium">Senior Digital Marketing Specialist</h4>
+                            <p class="text-primary">2022 - Present</p>
+                            <p class="text-gray-400">Horizon Digital Agency, New York</p>
+                        </div>
+                        <div class="timeline-item pb-6">
+                            <h4 class="text-lg font-medium">Video Production Lead</h4>
+                            <p class="text-primary">2019 - 2022</p>
+                            <p class="text-gray-400">CreativeVision Studios, San Francisco</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="text-lg font-medium">Graphic Designer</h4>
+                            <p class="text-primary">2017 - 2019</p>
+                            <p class="text-gray-400">Artistry Design Co., Chicago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold heading-font mb-4">My <span class="gradient-text">Skills</span></h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    I've developed expertise across multiple digital disciplines, allowing me to deliver comprehensive solutions for complex projects.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Digital Marketing -->
+                <div class="skill-card glass-card p-6 rounded-lg">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-6">
+                        <i class="ri-line-chart-line ri-2x text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Digital Marketing</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>SEO & SEM</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Social Media Marketing</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Content Strategy</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Email Marketing</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Video Editing -->
+                <div class="skill-card glass-card p-6 rounded-lg">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-6">
+                        <i class="ri-movie-line ri-2x text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Video Editing</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Adobe Premiere Pro</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>After Effects</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>DaVinci Resolve</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Final Cut Pro</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Graphic Design -->
+                <div class="skill-card glass-card p-6 rounded-lg">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-6">
+                        <i class="ri-palette-line ri-2x text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Graphic Design</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Adobe Photoshop</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Illustrator</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Figma</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>InDesign</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Data Analysis -->
+                <div class="skill-card glass-card p-6 rounded-lg">
+                    <div class="w-16 h-16 flex items-center justify-center bg-primary bg-opacity-20 rounded-full mb-6">
+                        <i class="ri-bar-chart-grouped-line ri-2x text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">Data Analysis</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Google Analytics</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Excel/Spreadsheets</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Tableau</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>SQL</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Skills Chart -->
+            <div class="mt-16">
+                <div class="glass-card p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-6 text-center">Skills Overview</h3>
+                    <div id="skills-chart" class="w-full h-80"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold heading-font mb-4">My <span class="gradient-text">Portfolio</span></h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Explore my recent projects across different disciplines. Each project represents my commitment to excellence and innovation.
+                </p>
+            </div>
+            
+            <!-- Portfolio Filter -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="portfolio-filter px-6 py-2 !rounded-button bg-primary text-white whitespace-nowrap" data-filter="all">All Projects</button>
+                <button class="portfolio-filter px-6 py-2 !rounded-button bg-gray-700 hover:bg-gray-600 text-white whitespace-nowrap" data-filter="marketing">Digital Marketing</button>
+                <button class="portfolio-filter px-6 py-2 !rounded-button bg-gray-700 hover:bg-gray-600 text-white whitespace-nowrap" data-filter="video">Video Editing</button>
+                <button class="portfolio-filter px-6 py-2 !rounded-button bg-gray-700 hover:bg-gray-600 text-white whitespace-nowrap" data-filter="design">Graphic Design</button>
+                <button class="portfolio-filter px-6 py-2 !rounded-button bg-gray-700 hover:bg-gray-600 text-white whitespace-nowrap" data-filter="analysis">Data Analysis</button>
+            </div>
+            
+            <!-- Portfolio Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="marketing">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=digital%20marketing%20campaign%20visualization%20with%20analytics%20dashboard%2C%20social%20media%20icons%2C%20professional%20dark%20theme%20design%2C%20high%20quality%20marketing%20strategy%20presentation&width=600&height=400&seq=3&orientation=landscape" alt="Digital Marketing Campaign" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Digital Marketing</span>
+                        <h3 class="text-xl font-semibold mb-2">Eco-Friendly Brand Campaign</h3>
+                        <p class="text-gray-400">Comprehensive digital marketing strategy for a sustainable fashion brand, resulting in 200% increase in online engagement.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="video">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=video%20editing%20workspace%20with%20timeline%20interface%2C%20professional%20video%20production%2C%20dark%20theme%2C%20high%20quality%20cinematic%20post-production%20visualization&width=600&height=400&seq=4&orientation=landscape" alt="Video Production" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Video Editing</span>
+                        <h3 class="text-xl font-semibold mb-2">Tech Product Launch Video</h3>
+                        <p class="text-gray-400">Created a cinematic product reveal video for a flagship smartphone launch, garnering over 2 million views.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="design">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=graphic%20design%20portfolio%20with%20branding%20elements%2C%20logo%20designs%2C%20color%20palettes%2C%20professional%20dark%20theme%20design%20workspace%2C%20high%20quality%20creative%20design%20visualization&width=600&height=400&seq=5&orientation=landscape" alt="Graphic Design" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Graphic Design</span>
+                        <h3 class="text-xl font-semibold mb-2">Luxury Brand Identity</h3>
+                        <p class="text-gray-400">Developed complete brand identity for a high-end jewelry brand, including logo, packaging, and digital assets.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="analysis">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=data%20analysis%20dashboard%20with%20charts%2C%20graphs%2C%20travel%20analytics%20visualization%2C%20professional%20dark%20theme%20design%2C%20high%20quality%20business%20intelligence%20visualization&width=600&height=400&seq=6&orientation=landscape" alt="Data Analysis" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Data Analysis</span>
+                        <h3 class="text-xl font-semibold mb-2">Travel Trend Analysis</h3>
+                        <p class="text-gray-400">Analyzed travel patterns for a major airline, identifying key opportunities that increased bookings by 35%.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="marketing">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=email%20marketing%20campaign%20design%20with%20newsletter%20templates%2C%20conversion%20analytics%2C%20professional%20dark%20theme%20design%2C%20high%20quality%20digital%20marketing%20visualization&width=600&height=400&seq=7&orientation=landscape" alt="Email Marketing" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Digital Marketing</span>
+                        <h3 class="text-xl font-semibold mb-2">Email Marketing Revamp</h3>
+                        <p class="text-gray-400">Redesigned email marketing strategy for an e-commerce client, increasing open rates by 45% and conversions by 60%.</p>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="portfolio-item glass-card rounded-lg overflow-hidden" data-category="video">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=documentary%20film%20production%20with%20camera%20equipment%2C%20editing%20timeline%2C%20professional%20dark%20theme%20design%2C%20high%20quality%20cinematic%20visualization&width=600&height=400&seq=8&orientation=landscape" alt="Documentary Production" class="w-full h-full object-cover object-top">
+                        <div class="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="view-project px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Project</button>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <span class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3">Video Editing</span>
+                        <h3 class="text-xl font-semibold mb-2">Mini-Documentary Series</h3>
+                        <p class="text-gray-400">Produced and edited a 5-part documentary series on sustainable urban development for a major streaming platform.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- View More Button -->
+            <div class="text-center mt-12">
+                <button class="px-8 py-3 border border-primary text-primary font-medium !rounded-button hover:bg-primary hover:text-white transition-all whitespace-nowrap">View More Projects</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-800" style="background-image: url('https://readdy.ai/api/search-image?query=abstract%20dark%20background%20with%20subtle%20purple%20and%20blue%20gradient%2C%20modern%20digital%20particles%20effect%2C%20perfect%20for%20contact%20section%2C%20high%20quality%2C%20minimalist%20design%2C%20elegant&width=1920&height=1080&seq=9&orientation=landscape'); background-size: cover; background-position: center;">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold heading-font mb-4">Get In <span class="gradient-text">Touch</span></h2>
+                <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                <p class="text-gray-300 max-w-2xl mx-auto">
+                    Have a project in mind or want to discuss potential collaboration? I'd love to hear from you!
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <div class="glass-card p-8 rounded-lg h-full">
+                        <h3 class="text-2xl font-semibold mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-20 rounded-full flex-shrink-0">
+                                    <i class="ri-map-pin-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Location</h4>
+                                    <p class="text-gray-400">Pakistan, Faisalabad,  </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-20 rounded-full flex-shrink-0">
+                                    <i class="ri-mail-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Email</h4>
+                                    <p class="text-gray-400">contact@mrkali.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-20 rounded-full flex-shrink-0">
+                                    <i class="ri-phone-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Phone</h4>
+                                    <p class="text-gray-400">+92-3038175273</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary bg-opacity-20 rounded-full flex-shrink-0">
+                                    <i class="ri-time-line ri-lg text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-medium mb-1">Working Hours</h4>
+                                    <p class="text-gray-400">Monday - Friday: 9 AM - 6 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-medium mb-4">Connect With Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#0077b5] rounded-full hover:opacity-90 transition-opacity">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#1da1f2] rounded-full hover:opacity-90 transition-opacity">
+                                    <i class="ri-twitter-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#e4405f] rounded-full hover:opacity-90 transition-opacity">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 flex items-center justify-center text-white bg-[#25d366] rounded-full hover:opacity-90 transition-opacity">
+                                    <i class="ri-whatsapp-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="glass-card p-8 rounded-lg">
+                        <h3 class="text-2xl font-semibold mb-6">Send Me a Message</h3>
+                        <form id="contact-form">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+                                    <input type="text" id="name" class="w-full bg-gray-700 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary outline-none" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Your Email</label>
+                                    <input type="email" id="email" class="w-full bg-gray-700 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary outline-none" placeholder="john@example.com">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full bg-gray-700 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary outline-none" placeholder="Project Inquiry">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="5" class="w-full bg-gray-700 border-none rounded p-3 text-white focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="Your message here..."></textarea>
+                            </div>
+                            
+                            <div class="mb-6 flex items-center">
+                                <div id="newsletter-checkbox" class="custom-checkbox mr-3"></div>
+                                <label for="newsletter-checkbox" class="text-gray-300 cursor-pointer">Subscribe to my newsletter for updates</label>
+                            </div>
+                            
+                            <button type="submit" class="w-full py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-10 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-['Pacifico'] text-white">Mr Kali</a>
+                    <p class="text-gray-400 mt-2">Creating digital excellence since 2017</p>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 mb-6 md:mb-0">
+                    <a href="#home" class="text-gray-400 hover:text-primary transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-primary transition-colors">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-primary transition-colors">Skills</a>
+                    <a href="#portfolio" class="text-gray-400 hover:text-primary transition-colors">Portfolio</a>
+                    <a href="#contact" class="text-gray-400 hover:text-primary transition-colors">Contact</a>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                        <i class="ri-linkedin-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                        <i class="ri-twitter-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                        <i class="ri-instagram-fill ri-lg"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                        <i class="ri-github-fill ri-lg"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Mr Kali. All rights reserved.</p>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 text-sm hover:text-gray-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 text-sm hover:text-gray-400 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-500 text-sm hover:text-gray-400 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 flex items-center justify-center bg-primary text-white rounded-full shadow-lg opacity-0 invisible transition-all">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+    
+    <!-- Project Modal -->
+    <div id="project-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center hidden">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="glass-card rounded-lg overflow-hidden relative">
+                <button id="close-modal" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white bg-gray-800 rounded-full hover:bg-gray-700 transition-colors z-10">
+                    <i class="ri-close-line ri-lg"></i>
+                </button>
+                
+                <div class="p-8">
+                    <div class="mb-8">
+                        <img id="modal-image" src="" alt="Project" class="w-full h-auto rounded-lg">
+                    </div>
+                    
+                    <div>
+                        <span id="modal-category" class="inline-block px-3 py-1 bg-primary bg-opacity-20 text-primary text-sm rounded-full mb-3"></span>
+                        <h3 id="modal-title" class="text-2xl font-semibold mb-4"></h3>
+                        <p id="modal-description" class="text-gray-300 mb-6"></p>
+                        
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Client</h4>
+                                <p id="modal-client" class="text-gray-400"></p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Duration</h4>
+                                <p id="modal-duration" class="text-gray-400"></p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Tools Used</h4>
+                                <p id="modal-tools" class="text-gray-400"></p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium mb-2">Completion Date</h4>
+                                <p id="modal-date" class="text-gray-400"></p>
+                            </div>
+                        </div>
+                        
+                        <a href="#" id="modal-link" class="inline-block px-6 py-3 bg-primary text-white font-medium !rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">View Live Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Text rotation animation
+            const textRotate = document.getElementById('text-rotate');
+            const textItems = textRotate.children;
+            let currentIndex = 0;
+            
+            function rotateText() {
+                textItems[currentIndex].style.opacity = '0';
+                textItems[currentIndex].style.transform = 'translateY(-20px)';
+                
+                currentIndex = (currentIndex + 1) % textItems.length;
+                
+                setTimeout(() => {
+                    for (let i = 0; i < textItems.length; i++) {
+                        if (i === currentIndex) {
+                            textItems[i].style.opacity = '1';
+                            textItems[i].style.transform = 'translateY(0)';
+                        } else {
+                            textItems[i].style.opacity = '0';
+                            textItems[i].style.transform = 'translateY(20px)';
+                        }
+                    }
+                }, 500);
+            }
+            
+            // Initialize text rotation
+            for (let i = 0; i < textItems.length; i++) {
+                textItems[i].style.opacity = i === 0 ? '1' : '0';
+                textItems[i].style.transform = i === 0 ? 'translateY(0)' : 'translateY(20px)';
+                textItems[i].style.transition = 'opacity 0.5s, transform 0.5s';
+                textItems[i].style.position = 'absolute';
+            }
+            
+            setInterval(rotateText, 3000);
+            
+            // Skills chart
+            const skillsChart = echarts.init(document.getElementById('skills-chart'));
+            const skillsOption = {
+                animation: false,
+                radar: {
+                    indicator: [
+                        { name: 'Digital Marketing', max: 100 },
+                        { name: 'Video Editing', max: 100 },
+                        { name: 'Graphic Design', max: 100 },
+                        { name: 'Data Analysis', max: 100 },
+                        { name: 'UI/UX Design', max: 100 },
+                        { name: 'Content Creation', max: 100 }
+                    ],
+                    radius: '65%',
+                    splitNumber: 4,
+                    axisName: {
+                        color: '#f5f5f5',
+                        fontSize: 12
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    splitArea: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Skills',
+                    type: 'radar',
+                    data: [
+                        {
+                            value: [90, 85, 85, 80, 75, 88],
+                            name: 'Skill Level',
+                            areaStyle: {
+                                color: {
+                                    type: 'linear',
+                                    x: 0,
+                                    y: 0,
+                                    x2: 0,
+                                    y2: 1,
+                                    colorStops: [{
+                                        offset: 0, color: 'rgba(123, 104, 238, 0.3)'
+                                    }, {
+                                        offset: 1, color: 'rgba(0, 206, 209, 0.1)'
+                                    }]
+                                }
+                            },
+                            lineStyle: {
+                                color: '#7B68EE',
+                                width: 2
+                            },
+                            itemStyle: {
+                                color: '#00CED1'
+                            }
+                        }
+                    ]
+                }]
+            };
+            
+            skillsChart.setOption(skillsOption);
+            
+            // Portfolio filtering
+            const portfolioFilters = document.querySelectorAll('.portfolio-filter');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            
+            portfolioFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    // Update active filter
+                    portfolioFilters.forEach(f => {
+                        f.classList.remove('bg-primary');
+                        f.classList.add('bg-gray-700');
+                    });
+                    filter.classList.remove('bg-gray-700');
+                    filter.classList.add('bg-primary');
+                    
+                    const filterValue = filter.getAttribute('data-filter');
+                    
+                    // Filter items
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Project modal
+            const viewProjectButtons = document.querySelectorAll('.view-project');
+            const projectModal = document.getElementById('project-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            const projectDetails = [
+                {
+                    title: 'Eco-Friendly Brand Campaign',
+                    category: 'Digital Marketing',
+                    description: 'Developed and executed a comprehensive digital marketing strategy for a sustainable fashion brand. The campaign focused on raising awareness about eco-friendly practices while driving sales through targeted content marketing, SEO optimization, and social media engagement. The campaign resulted in a 200% increase in online engagement and a 150% increase in sales over a three-month period.',
+                    client: 'GreenThread Apparel',
+                    duration: '3 months',
+                    tools: 'Google Analytics, Facebook Ads Manager, Mailchimp, SEMrush',
+                    date: 'March 2025',
+                    link: '#'
+                },
+                {
+                    title: 'Tech Product Launch Video',
+                    category: 'Video Editing',
+                    description: 'Created a cinematic product reveal video for a flagship smartphone launch. The video combined sleek product shots with dynamic motion graphics to highlight key features and innovations. The video was featured on the company\'s website, social media channels, and in retail locations worldwide, garnering over 2 million views within the first week of release.',
+                    client: 'NexGen Technologies',
+                    duration: '6 weeks',
+                    tools: 'Adobe Premiere Pro, After Effects, DaVinci Resolve',
+                    date: 'January 2025',
+                    link: '#'
+                },
+                {
+                    title: 'Luxury Brand Identity',
+                    category: 'Graphic Design',
+                    description: 'Developed a complete brand identity for a high-end jewelry brand entering the market. The project included logo design, typography selection, color palette development, packaging design, and digital asset creation. The brand identity successfully positioned the client as a premium luxury brand, resulting in successful partnerships with high-end retailers.',
+                    client: 'Lumina Jewelry',
+                    duration: '2 months',
+                    tools: 'Adobe Illustrator, Photoshop, InDesign, Figma',
+                    date: 'February 2025',
+                    link: '#'
+                },
+                {
+                    title: 'Travel Trend Analysis',
+                    category: 'Data Analysis',
+                    description: 'Conducted comprehensive analysis of travel patterns and customer preferences for a major airline. The analysis included customer segmentation, route profitability assessment, and seasonal trend identification. Insights from the analysis were used to optimize flight schedules and marketing strategies, resulting in a 35% increase in bookings for previously underperforming routes.',
+                    client: 'SkyWay Airlines',
+                    duration: '4 months',
+                    tools: 'Tableau, Excel, Python, SQL',
+                    date: 'December 2024',
+                    link: '#'
+                },
+                {
+                    title: 'Email Marketing Revamp',
+                    category: 'Digital Marketing',
+                    description: 'Redesigned the email marketing strategy for an e-commerce client specializing in home goods. The project involved creating new email templates, developing automated workflows, and implementing A/B testing to optimize performance. The revamped strategy increased open rates by 45%, click-through rates by 60%, and directly contributed to a 30% increase in email-driven revenue.',
+                    client: 'HomeStyle Essentials',
+                    duration: '2 months',
+                    tools: 'Mailchimp, Klaviyo, Adobe Photoshop',
+                    date: 'April 2025',
+                    link: '#'
+                },
+                {
+                    title: 'Mini-Documentary Series',
+                    category: 'Video Editing',
+                    description: 'Produced and edited a 5-part mini-documentary series on sustainable urban development for a major streaming platform. The series featured interviews with leading architects, city planners, and environmental experts, combined with stunning visuals of innovative urban projects around the world. The series received critical acclaim and was featured in several film festivals.',
+                    client: 'EcoVision Media',
+                    duration: '5 months',
+                    tools: 'Adobe Premiere Pro, After Effects, Audition',
+                    date: 'November 2024',
+                    link: '#'
+                }
+            ];
+            
+            viewProjectButtons.forEach((button, index) => {
+                button.addEventListener('click', () => {
+                    const projectItem = button.closest('.portfolio-item');
+                    const projectIndex = Array.from(portfolioItems).indexOf(projectItem);
+                    const project = projectDetails[projectIndex];
+                    
+                    document.getElementById('modal-image').src = projectItem.querySelector('img').src;
+                    document.getElementById('modal-category').textContent = project.category;
+                    document.getElementById('modal-title').textContent = project.title;
+                    document.getElementById('modal-description').textContent = project.description;
+                    document.getElementById('modal-client').textContent = project.client;
+                    document.getElementById('modal-duration').textContent = project.duration;
+                    document.getElementById('modal-tools').textContent = project.tools;
+                    document.getElementById('modal-date').textContent = project.date;
+                    document.getElementById('modal-link').href = project.link;
+                    
+                    projectModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', () => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal) {
+                    projectModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Custom form elements
+            const newsletterCheckbox = document.getElementById('newsletter-checkbox');
+            
+            newsletterCheckbox.addEventListener('click', () => {
+                newsletterCheckbox.classList.toggle('checked');
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Form validation would go here
+                
+                // Show success message
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+                newsletterCheckbox.classList.remove('checked');
+            });
+            
+            // Back to top button
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 500) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            const navLinks = document.querySelectorAll('a[href^="#"]');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Window resize handler for charts
+            window.addEventListener('resize', () => {
+                skillsChart.resize();
+            });
+        });
+    </script>
+</body>
+</html>
